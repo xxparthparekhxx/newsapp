@@ -14,7 +14,7 @@ class CategoryPage extends StatelessWidget {
     var stories = [];
 
     return FutureBuilder(
-      future: Future.delayed(Duration(milliseconds: 400), () {
+      future: Future.delayed(const Duration(milliseconds: 400), () {
         if (allNews != null) {
           NewsCategory g = allNews.AllNews.firstWhere(
               (NewsCategory element) => element.category == category);

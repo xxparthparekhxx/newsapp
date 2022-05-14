@@ -43,7 +43,7 @@ class NewsDrawer extends StatelessWidget {
     int i = Provider.of<NP>(context).screenindex;
     return Drawer(
       child: ListView(controller: ScrollController(), children: [
-        SizedBox(
+        const SizedBox(
             height: 200, width: 200, child: Center(child: Text("Weather"))),
         Column(children: [
           for (int index = 0; index < items.length; index++)

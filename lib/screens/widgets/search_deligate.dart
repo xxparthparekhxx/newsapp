@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 class NewsSearch extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) => IconButton(
-      onPressed: () => Navigator.pop(context), icon: Icon(Icons.arrow_left));
+      onPressed: () => Navigator.pop(context),
+      icon: const Icon(Icons.arrow_left));
 
   List<Article> resdecoder(res) {
     return (res["articles"] as List)
@@ -100,7 +101,7 @@ class NewsSearch extends SearchDelegate {
                             item: (snapshot.data as List<Article>)
                                 .elementAt(index)));
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -121,7 +122,7 @@ class NewsSearch extends SearchDelegate {
                         item:
                             (snapshot.data as List<Article>).elementAt(index)));
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -138,6 +139,6 @@ class NewsSearch extends SearchDelegate {
               onPressed: () {
                 query = "";
               },
-              icon: Icon(Icons.cancel))
+              icon: const Icon(Icons.cancel))
       ];
 }

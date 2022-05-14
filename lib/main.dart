@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.amber,
         ),
         title: 'Material App',
-        home: Home(),
+        home: const Home(),
       ),
     );
   }

@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
             IconButton(
                 onPressed: () =>
                     showSearch(context: context, delegate: NewsSearch()),
-                icon: Icon(Icons.search))
+                icon: const Icon(Icons.search))
           ],
           title: Text(Provider.of<NP>(context)
               .categories[Provider.of<NP>(context).screenindex])),

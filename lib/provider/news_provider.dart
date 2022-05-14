@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:newsapp/models/articles.dart';
 import 'package:http/http.dart' as http;
@@ -24,15 +23,6 @@ class NP with ChangeNotifier {
   int screenindex = 0;
   NP() {
     get_data_from_db();
-    () async {
-      for (var interface in await NetworkInterface.list()) {
-        print('== Interface: ${interface.name} ==');
-        for (var addr in interface.addresses) {
-          print(
-              '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
-        }
-      }
-    }();
   }
 
   Future fetch_all(SharedPreferences prefs, int pageSize) async {

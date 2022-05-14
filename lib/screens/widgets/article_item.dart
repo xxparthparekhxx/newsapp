@@ -78,7 +78,7 @@ class _ArticleItemState extends State<ArticleItem> {
                                               "/favicon.ico",
                                           errorBuilder:
                                               (context, error, stackTrace) =>
-                                                  Text(''),
+                                                  const Text(''),
                                         )),
                                     Expanded(
                                       flex: 7,
