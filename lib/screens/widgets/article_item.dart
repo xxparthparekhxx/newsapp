@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/screens/webviewscreen.dart';
@@ -23,7 +25,7 @@ class _ArticleItemState extends State<ArticleItem> {
         child: InkWell(
           onTap: () {
             if (widget.item.url != null) {
-              if (kIsWeb) {
+              if (!(Platform.isAndroid || Platform.isIOS)) {
                 launch(widget.item.url!);
               } else {
                 Navigator.of(context).push(MaterialPageRoute(
