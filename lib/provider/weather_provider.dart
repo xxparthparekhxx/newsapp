@@ -31,6 +31,8 @@ class WP with ChangeNotifier {
 
   final String _base = "https://api.openweathermap.org/data/2.5/onecall?";
   final String _apiKey = '&appid=bb761635ddb3320ffc1f2148274d3436';
+
+  weather? currentweather;
   WP() {
     init();
   }
@@ -42,7 +44,9 @@ class WP with ChangeNotifier {
       Position pos = await _determinePosition();
       var res = await http.get(
           Uri.parse("$_base&lat=${pos.latitude}&lon=${pos.longitude}$_apiKey"));
-      weather.fromJson(jsonDecode(res.body) as Map);
+      currentweather =
+          weather.fromJson((jsonDecode(res.body) as Map)['current']);
+      notifyListeners();
 
       //show old one and fetch new and show that
     }

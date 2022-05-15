@@ -4,7 +4,7 @@ class weather {
   final int sunset;
   final double temp;
   final double feels_like;
-  final int preasure;
+  final int pressure;
   final int humidity;
   final double dew_point;
   final double uvi;
@@ -21,7 +21,7 @@ class weather {
       this.sunset,
       this.temp,
       this.feels_like,
-      this.preasure,
+      this.pressure,
       this.humidity,
       this.dew_point,
       this.uvi,
@@ -40,7 +40,7 @@ class weather {
       e["sunset"],
       e["temp"],
       e["feels_like"],
-      e["preasure"],
+      e["pressure"],
       e["humidity"],
       e["dew_point"],
       e["uvi"],
@@ -51,5 +51,26 @@ class weather {
       e['weather'][0]["main"],
       e['weather'][0]["icon"],
     );
+  }
+
+  @override
+  String toString() {
+    return {
+      "dt": dt,
+      "sunrise": sunrise,
+      "sunset": sunset,
+      "temp": temp,
+      "feels_like": feels_like,
+      "pressure": pressure,
+      "humidity": humidity,
+      "dew_point": dew_point,
+      "uvi": uvi,
+      "clouds": clouds,
+      "visibility": visibility,
+      "wind_speed": wind_speed,
+      "wind_deg": wind_deg,
+      "name": Name,
+      "icon": Icon
+    }.toString();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newsapp/provider/news_provider.dart';
 import 'package:newsapp/screens/widgets/drawer/drawer_item.dart';
 import 'package:newsapp/screens/widgets/weather/weather_page.dart';
+import 'package:newsapp/screens/widgets/weather/weather_widget.dart';
 import 'package:provider/provider.dart';
 
 class NewsDrawer extends StatelessWidget {
@@ -44,12 +45,7 @@ class NewsDrawer extends StatelessWidget {
     int i = Provider.of<NP>(context).screenindex;
     return Drawer(
       child: ListView(controller: ScrollController(), children: [
-        GestureDetector(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const WeatherPage())),
-          child: const SizedBox(
-              height: 200, width: 200, child: Center(child: Text("Weather"))),
-        ),
+        const WeatherWidget(),
         for (int index = 0; index < items.length; index++)
           DrawerItem(
               iconData: items[index]["icon"] as IconData,
