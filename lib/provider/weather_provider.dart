@@ -30,7 +30,7 @@ class WP with ChangeNotifier {
   bool enabled = false;
 
   final String _base = "https://api.openweathermap.org/data/2.5/onecall?";
-  final String _apiKey = '&appid=bb761635ddb3320ffc1f2148274d3436';
+  final String _apiKey = '&appid=Your api key';
 
   weather? currentweather;
   WP() {
