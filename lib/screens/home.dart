@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/provider/news_provider.dart';
-import 'package:newsapp/screens/widgets/categorypage.dart';
+import 'package:newsapp/screens/widgets/drawer/news_drawer.dart';
+import 'package:newsapp/screens/widgets/news/categorypage.dart';
 import 'package:newsapp/screens/widgets/search_deligate.dart';
 import 'package:provider/provider.dart';
-import './widgets/news_drawer.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
