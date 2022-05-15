@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/models/articles.dart';
 import 'package:newsapp/provider/news_provider.dart';
-import 'package:newsapp/screens/widgets/article_item.dart';
+import 'package:newsapp/screens/widgets/news/article_item.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
