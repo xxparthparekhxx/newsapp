@@ -44,15 +44,20 @@ class NewsDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     int i = Provider.of<NP>(context).screenindex;
     return Drawer(
-      child: ListView(controller: ScrollController(), children: [
-        const WeatherWidget(),
-        for (int index = 0; index < items.length; index++)
-          DrawerItem(
-              iconData: items[index]["icon"] as IconData,
-              text: items[index]["name"] as String,
-              index: index,
-              selected: index == i),
-      ]),
+      child: ListView(
+          controller: ScrollController(),
+          shrinkWrap: true,
+          addRepaintBoundaries: true,
+          cacheExtent: double.infinity,
+          children: [
+            const WeatherWidget(),
+            for (int index = 0; index < items.length; index++)
+              DrawerItem(
+                  iconData: items[index]["icon"] as IconData,
+                  text: items[index]["name"] as String,
+                  index: index,
+                  selected: index == i),
+          ]),
     );
   }
 }
