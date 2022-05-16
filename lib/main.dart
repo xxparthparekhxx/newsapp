@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:newsapp/provider/news_provider.dart';
 import 'package:newsapp/provider/weather_provider.dart';
 import 'package:newsapp/screens/home.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => {
+      runApp(const MyApp()),
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+          systemNavigationBarColor: Colors.amber,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: true))
+    };
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,7 +33,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.amber,
         ),
-        title: 'Material App',
+        title: 'News App',
         home: const Home(),
       ),
     );
