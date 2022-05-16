@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:newsapp/models/articles.dart';
 import 'package:newsapp/provider/news_provider.dart';
 import 'package:newsapp/screens/widgets/news/article_item.dart';
@@ -31,13 +32,6 @@ class CategoryPage extends StatelessWidget {
                   backgroundColor: Colors.black,
                 ),
               ),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Text(
-                "Top Headlines",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
             if (stories.isNotEmpty) ...stories.map((e) => ArticleItem(item: e)),
           ],
         ),
