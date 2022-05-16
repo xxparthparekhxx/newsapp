@@ -7,7 +7,7 @@ class weather {
   final int pressure;
   final int humidity;
   final double dew_point;
-  final double uvi;
+  final num uvi;
   final int clouds;
   final int visibility;
   final double wind_speed;
@@ -32,7 +32,7 @@ class weather {
       this.Name,
       this.Icon);
 
-  static fromJson(Object e) {
+  static weather fromJson(Object e) {
     e = e as Map;
     return weather(
       e["dt"],
