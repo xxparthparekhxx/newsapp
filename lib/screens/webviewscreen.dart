@@ -41,6 +41,8 @@ class WebViewScreenState extends State<WebViewScreen> {
             flex: 99,
             child: Material(
               child: WebView(
+                allowsInlineMediaPlayback: true,
+                userAgent: "News app by https://github.com/xxparthparekhxx",
                 javascriptMode: JavascriptMode.unrestricted,
                 initialUrl: widget.url,
                 onProgress: (i) {
