@@ -78,7 +78,7 @@ class WP with ChangeNotifier {
         Uri.parse("$_base&lat=${pos.latitude}&lon=${pos.longitude}$_apiKey"));
 
     var location_res = http.get(Uri.parse(
-        "http://api.positionstack.com/v1/reverse?access_key=d6c9b4c7653ae60a05ed049e7dee9835&query=${pos.latitude},${pos.longitude}"));
+        "http://api.positionstack.com/v1/reverse?access_key=apikey&query=${pos.latitude},${pos.longitude}"));
 
     String weather_data = (await weather_res).body;
     http.Response Locationresponse = await location_res;
