@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:newsapp/models/loacation.dart';
 import 'package:newsapp/models/weather.dart';
+import 'package:newsapp/provider/Secret/api_key_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WP with ChangeNotifier {
@@ -34,7 +34,7 @@ class WP with ChangeNotifier {
   }
 
   final String _base = "https://api.openweathermap.org/data/2.5/onecall?";
-  final String _apiKey = '&appid=bb761635ddb3320ffc1f2148274d3436';
+  final String _apiKey = KeyHandler.weatherKey;
 
   weather? currentweather;
   Location? locationDetails;
@@ -61,34 +61,34 @@ class WP with ChangeNotifier {
 
   Future getWeatherAndLocation() async {
     var p = await SharedPreferences.getInstance();
-    var old_weather = p.getString("weather");
-    var old_location = p.getString("location");
+    var oldWeather = p.getString("weather");
+    var oldLocation = p.getString("location");
 
-    if (old_weather != null) {
+    if (oldWeather != null) {
       currentweather =
-          weather.fromJson((jsonDecode(old_weather) as Map)['current']);
+          weather.fromJson((jsonDecode(oldWeather) as Map)['current']);
     }
-    if (old_location != null) {
-      locationDetails = Location.fromRes(old_location);
+    if (oldLocation != null) {
+      locationDetails = Location.fromRes(oldLocation);
     }
     notifyListeners();
     Position pos = await _determinePosition();
 
-    var weather_res = http.get(
+    var weatherRes = http.get(
         Uri.parse("$_base&lat=${pos.latitude}&lon=${pos.longitude}$_apiKey"));
 
-    var location_res = http.get(Uri.parse(
-        "http://api.positionstack.com/v1/reverse?access_key=apikey&query=${pos.latitude},${pos.longitude}"));
+    var locationRes = http.get(Uri.parse(
+        "http://api.positionstack.com/v1/reverse?access_key=${KeyHandler.loactionKey}&query=${pos.latitude},${pos.longitude}"));
 
-    String weather_data = (await weather_res).body;
-    http.Response Locationresponse = await location_res;
+    String weatherData = (await weatherRes).body;
+    http.Response Locationresponse = await locationRes;
 
-    p.setString("weather", weather_data);
+    p.setString("weather", weatherData);
     p.setString("loaction", Locationresponse.body);
-
+    var d = (jsonDecode(weatherData) as Map);
+    print(d);
     //getting weather
-    currentweather =
-        weather.fromJson((jsonDecode(weather_data) as Map)['current']);
+    currentweather = weather.fromJson(d['current']);
 
     // getting the location details eg: city,state,flag....
     locationDetails = Location.fromRes(Locationresponse.body);
