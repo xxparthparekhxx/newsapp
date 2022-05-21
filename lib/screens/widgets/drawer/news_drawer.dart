@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/provider/news_provider.dart';
 import 'package:newsapp/screens/widgets/drawer/drawer_item.dart';
-import 'package:newsapp/screens/widgets/weather/weather_page.dart';
 import 'package:newsapp/screens/widgets/weather/weather_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +45,6 @@ class NewsDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
           controller: ScrollController(),
-          shrinkWrap: true,
           addRepaintBoundaries: true,
           cacheExtent: double.infinity,
           children: [
