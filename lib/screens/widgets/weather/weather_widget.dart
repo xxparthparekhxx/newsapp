@@ -19,7 +19,7 @@ class WeatherWidget extends StatelessWidget {
           onTap: () async => await Provider.of<WP>(context, listen: false)
               .getWeatherAndLocation(),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(4.0),
             child: SizedBox(
               width: 200,
               height: 100,
@@ -69,7 +69,7 @@ class WeatherWidget extends StatelessWidget {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Material(
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
