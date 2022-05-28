@@ -9,7 +9,7 @@ class GraphHelper {
     return date.hour.toString() + ":" + date.minute.toString();
   }
 
-  static twelveHourTimeFormTimeStamp(int timestamp) {
+  static String twelveHourTimeFormTimeStamp(int timestamp) {
     String twelvehrtime = DateFormat("d/M, h:mma")
         .format(DateTime.fromMillisecondsSinceEpoch(timestamp * 1000));
     return twelvehrtime;

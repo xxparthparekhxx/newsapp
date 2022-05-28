@@ -10,185 +10,174 @@ class InsideWeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // CONVERT FROM EXPANDED TO COLUMN
     weather CurrentWeather = Provider.of<WP>(context).currentweather!;
-    return Expanded(
-      child: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      (GraphHelper.convertfromKelvin(CurrentWeather.temp)
-                                  .toInt())
-                              .toString() +
-                          "°",
-                      style: inside_weather_textStyle,
-                    ),
-                  ),
+    Size ss = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        // First Row
+        Container(
+          height: ss.height * 0.17,
+          padding: EdgeInsets.symmetric(horizontal: ss.width * 0.1),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Center(
+                child: Text(
+                  (GraphHelper.convertfromKelvin(
+                                  CurrentWeather.temp) // DEGREE WIDGET
+                              .toInt())
+                          .toString() +
+                      "°",
+                  style: inside_weather_textStyle,
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.values[2],
-                    children: [
-                      Text(
-                        "${GraphHelper.twelveHourTimeFormTimeStamp(CurrentWeather.dt)}",
-                        style: inside_weather_textStyle_small,
-                      ),
-                      Text(
-                        "Feels Like " +
-                            GraphHelper.convertfromKelvin(
-                                    CurrentWeather.feels_like)
-                                .toInt()
-                                .toString(),
-                        style: inside_weather_textStyle_small,
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                    child: Image.network(
-                        "http://openweathermap.org/img/wn/${CurrentWeather.Icon}@4x.png"))
-              ],
-            ),
-          ),
-          Expanded(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              color: Colors.black,
-              margin: const EdgeInsets.all(15),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Row(
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.values[2],
                   children: [
-                    Expanded(
-                      child: Center(
-                        child: Column(children: [
-                          const Expanded(
-                            child: Text(
-                              "Sunrise",
-                              style: inside_weather_textStyle_small,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              GraphHelper.twelveHourTimeFormTimeStamp(
-                                  CurrentWeather.sunrise),
-                              style: inside_weather_textStyle_small,
-                            ),
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Image.asset("lib/assets/sunrise.png"))
-                        ]),
-                      ),
+                    Text(
+                      GraphHelper.twelveHourTimeFormTimeStamp(
+                          CurrentWeather.dt),
+                      style: inside_weather_textStyle_small,
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Column(children: [
-                          const Expanded(
-                            child: Text(
-                              "Sunset",
-                              style: inside_weather_textStyle_small,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              GraphHelper.twelveHourTimeFormTimeStamp(
-                                  CurrentWeather.sunset),
-                              style: inside_weather_textStyle_small,
-                            ),
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Image.asset("lib/assets/Sunset.png"))
-                        ]),
-                      ),
-                    ),
+                    Text(
+                      "Feels Like " +
+                          GraphHelper.convertfromKelvin(
+                                  CurrentWeather.feels_like)
+                              .toInt()
+                              .toString(),
+                      style: inside_weather_textStyle_small,
+                    )
                   ],
                 ),
               ),
+              Image.network(
+                "http://openweathermap.org/img/wn/${CurrentWeather.Icon}@4x.png",
+                width: ss.width * 0.3,
+              )
+            ],
+          ),
+        ),
+
+        Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          color: const Color.fromARGB(221, 25, 25, 25),
+          margin: const EdgeInsets.all(15),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: Column(children: [
+                    const Text(
+                      "Sunrise",
+                      style: inside_weather_textStyle_small,
+                    ),
+                    Text(
+                      GraphHelper.twelveHourTimeFormTimeStamp(
+                          CurrentWeather.sunrise),
+                      style: inside_weather_textStyle_small,
+                    ),
+                    Image.asset(
+                      "lib/assets/sunrise.png",
+                      height: ss.height * 0.09,
+                      width: ss.width * 0.4,
+                    )
+                  ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Container(
+                    width: 1,
+                    color: Colors.white24,
+                    child: Column(),
+                  ),
+                ),
+                Center(
+                  child: Column(children: [
+                    const Text(
+                      "Sunset",
+                      style: inside_weather_textStyle_small,
+                    ),
+                    Text(
+                      GraphHelper.twelveHourTimeFormTimeStamp(
+                              CurrentWeather.sunset)
+                          .substring(5),
+                      style: inside_weather_textStyle_small,
+                    ),
+                    Image.asset(
+                      "lib/assets/Sunset.png",
+                      width: ss.width * 0.4,
+                      height: ss.height * 0.1,
+                    )
+                  ]),
+                ),
+              ],
             ),
           ),
-          Expanded(
-              child: Card(
-            elevation: 15,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            margin: const EdgeInsets.all(12),
-            color: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(children: [
-                      const Expanded(
-                          flex: 2,
-                          child: Icon(
-                            Icons.wb_sunny,
-                            size: 40,
-                            color: Colors.amber,
-                          )),
-                      const Expanded(
-                          child: Text(
-                        "UV index",
-                        style: inside_weather_textStyle_small,
-                      )),
-                      Expanded(
-                          child: Text(CurrentWeather.uvi.toString(),
-                              style: i_small2)),
-                    ]),
+        ),
+        Card(
+          elevation: 15,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          margin: const EdgeInsets.all(12),
+          color: const Color.fromARGB(255, 31, 30, 30),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(mainAxisSize: MainAxisSize.min, children: [
+                  const Icon(
+                    Icons.wb_sunny,
+                    size: 40,
+                    color: Colors.amber,
                   ),
-                  Expanded(
-                    child: Column(children: [
-                      const Expanded(
-                          flex: 2,
-                          child: Icon(
-                            Icons.air,
-                            size: 40,
-                            color: Colors.white30,
-                          )),
-                      const Expanded(
-                          child: Text(
-                        "wind Speed",
-                        style: inside_weather_textStyle_small,
-                      )),
-                      Expanded(
-                          child: Text(
-                              CurrentWeather.wind_speed.toString() + " km/h",
-                              style: i_small2)),
-                    ]),
+                  const Text(
+                    "UV index",
+                    style: inside_weather_textStyle_small,
                   ),
-                  Expanded(
-                    child: Column(children: [
-                      Expanded(
-                          flex: 2,
-                          child: Icon(
-                            Icons.water_drop_sharp,
-                            size: 40,
-                            color: Colors.blue[300],
-                          )),
-                      const Expanded(
-                          child: Text(
-                        "Humidity",
-                        style: inside_weather_textStyle_small,
-                      )),
-                      Expanded(
-                          child: Text(
-                        CurrentWeather.humidity.toString() + "%",
-                        style: i_small2,
-                      )),
-                    ]),
+                  Text(CurrentWeather.uvi.toString(), style: i_small2),
+                ]),
+                Column(mainAxisSize: MainAxisSize.min, children: [
+                  const Icon(
+                    Icons.air,
+                    size: 40,
+                    color: Colors.white30,
                   ),
-                ],
-              ),
+                  const Text(
+                    "wind Speed",
+                    style: inside_weather_textStyle_small,
+                  ),
+                  Text(CurrentWeather.wind_speed.toString() + " km/h",
+                      style: i_small2),
+                ]),
+                Column(mainAxisSize: MainAxisSize.min, children: [
+                  Icon(
+                    Icons.water_drop_sharp,
+                    size: 40,
+                    color: Colors.blue[300],
+                  ),
+                  const Text(
+                    "Humidity",
+                    style: inside_weather_textStyle_small,
+                  ),
+                  Text(
+                    CurrentWeather.humidity.toString() + "%",
+                    style: i_small2,
+                  ),
+                ]),
+              ],
             ),
-          ))
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

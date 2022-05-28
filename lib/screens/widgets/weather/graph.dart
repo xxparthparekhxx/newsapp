@@ -25,13 +25,9 @@ class Graph extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: LinearGradient(
-            colors: gradientColors,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.black),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: LineChart(
@@ -79,7 +75,8 @@ class Graph extends StatelessWidget {
 
               //Border
               borderData: FlBorderData(
-                border: Border.all(color: const Color(0xff37434d), width: 1),
+                border: Border.all(
+                    color: const Color.fromARGB(255, 254, 254, 254), width: 1),
                 show: true,
               ),
 

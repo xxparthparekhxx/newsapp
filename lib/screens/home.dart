@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/provider/news_provider.dart';
-import 'package:newsapp/provider/weather_provider.dart';
 import 'package:newsapp/screens/widgets/drawer/news_drawer.dart';
 import 'package:newsapp/screens/widgets/news/categorypage.dart';
 import 'package:newsapp/screens/widgets/search_deligate.dart';
@@ -13,7 +12,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     int index = Provider.of<NP>(context).screenindex;
     List<String> cate = Provider.of<NP>(context).categories;
-    Provider.of<WP>(context, listen: false).isLoading;
     return Scaffold(
       appBar: AppBar(
           actions: [
