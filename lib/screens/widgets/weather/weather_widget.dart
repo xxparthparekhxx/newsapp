@@ -130,8 +130,7 @@ class EnableWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: () async => await Provider.of<WP>(context, listen: false)
-            .getWeatherAndLocation(),
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: SizedBox(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/screens/webviewscreen.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -70,13 +71,13 @@ class _ArticleItemState extends State<ArticleItem> {
                                   children: [
                                     Expanded(
                                         flex: 1,
-                                        child: Image.network(
-                                          widget.item.url!
+                                        child: CachedNetworkImage(
+                                          imageUrl: widget.item.url!
                                                   .split("/")
                                                   .sublist(0, 3)
                                                   .join("/") +
                                               "/favicon.ico",
-                                          errorBuilder:
+                                          errorWidget:
                                               (context, error, stackTrace) =>
                                                   const Text(''),
                                         )),
@@ -101,14 +102,12 @@ class _ArticleItemState extends State<ArticleItem> {
                       flex: 1,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          widget.item.urlToImage ??
-                              "http://52.66.199.213:6969/error",
-                          errorBuilder: (context, error, stackTrace) =>
-                              Image.network(
-                            "http://52.66.199.213:6969/error",
-                          ),
-                        ),
+                        child: CachedNetworkImage(
+                            imageUrl: widget.item.urlToImage ?? "rR",
+                            errorWidget: (context, error, stackTrace) => Text(
+                                  "📰",
+                                  style: TextStyle(fontSize: 60),
+                                )),
                       ),
                     ),
                   ],

@@ -32,12 +32,14 @@ class NP with ChangeNotifier {
     for (int i = 0; i < categories.length; i++) {
       await prefs.setString(categories[i], await requests[i]);
     }
-    await prefs.setString("LastUpdated", DateTime.now().toString());
+    await prefs.setString(
+        "LastUpdated", DateTime.now().microsecondsSinceEpoch.toString());
   }
 
   News make_news(SharedPreferences prefs) {
     return News(categories.map((e) {
       var CurrentArticles = prefs.get(e);
+      print(CurrentArticles);
       CurrentArticles = jsonDecode(CurrentArticles! as String);
       return NewsCategory.fromjson(
           e, ((CurrentArticles! as Map)['articles'] as List));
@@ -77,14 +79,18 @@ class NP with ChangeNotifier {
   Future<String> fetch_stories(String? category, int pageSize) async {
     String payload =
         "$_top${(category != "top_stories" && category != "world" ? "category=$category&" : "")}${(category == "world" ? "language=en&pageSize=100" : "country=in&pageSize=100")}";
+    print(payload);
     var body = jsonEncode({"endpoint": payload});
-    String data = (await http
-            .post(Uri.parse("http://52.66.199.213:6969"), body: body, headers: {
-      "Accept": "*/*",
-      "Content-type": "application/json",
-      "User-Agent": "News app by https://github.com/xxparthparekhxx"
-    }))
+    String data = (await http.get(
+            Uri.parse(
+                "https://newsapi.org/v2/$payload&apiKey=20d99f327ed747cfae3d76aa38294007"),
+            headers: {
+          "Accept": "*/*",
+          "Content-type": "application/json",
+          "User-Agent": "News app"
+        }))
         .body;
+    print(data);
     return data;
   }
 

@@ -31,21 +31,18 @@ class NewsSearch extends SearchDelegate {
     var head = {
       "Accept": "*/*",
       "Content-type": "application/json",
-      "User-Agent": "News app by https://github.com/xxparthparekhxx"
+      "User-Agent": "News app"
     };
 
     String q = query.trim().replaceAll(" ", "+");
 
-    var body2 = jsonEncode({"endpoint": "everything?q=$q"});
-    var body1 = jsonEncode({"endpoint": "top-headlines?q=$q"});
-
-    Future<http.Response> data1 = (http.post(
-        Uri.parse("http://52.66.199.213:6969"),
-        body: body1,
+    Future<http.Response> data1 = (http.get(
+        Uri.parse(
+            "https://newsapi.org/v2/everything?q=$q&apiKey=20d99f327ed747cfae3d76aa38294007"),
         headers: head));
-    Future<http.Response> data2 = (http.post(
-        Uri.parse("http://52.66.199.213:6969"),
-        body: body2,
+    Future<http.Response> data2 = (http.get(
+        Uri.parse(
+            "https://newsapi.org/v2/top-headlines?q=$q&apiKey=20d99f327ed747cfae3d76aa38294007"),
         headers: head));
 
     var res = jsonDecode((await data1).body) as Map;

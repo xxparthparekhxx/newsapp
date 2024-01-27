@@ -40,7 +40,7 @@ class WP with ChangeNotifier {
   }
 
   final String _base = "https://api.openweathermap.org/data/2.5/onecall?";
-  final String _apiKey = KeyHandler.weatherKey;
+  final String _apiKey = "&appid=${KeyHandler.weatherKey}";
 
   weather? currentweather;
   Location? locationDetails;
@@ -79,6 +79,7 @@ class WP with ChangeNotifier {
     var oldLocation = p.getString("location");
 
     if (oldWeather != null) {
+      print(oldWeather);
       currentweather =
           weather.fromJson((jsonDecode(oldWeather) as Map)['current']);
     }
@@ -88,6 +89,7 @@ class WP with ChangeNotifier {
     notifyListeners();
     Position pos = await _determinePosition();
     //starting the weather fetching process
+    print("$_base&lat=${pos.latitude}&lon=${pos.longitude}$_apiKey");
     var weatherReq = http.get(
         Uri.parse("$_base&lat=${pos.latitude}&lon=${pos.longitude}$_apiKey"));
 
@@ -97,13 +99,14 @@ class WP with ChangeNotifier {
 
     // waiting for both requests to complete
     String weatherData = (await weatherReq).body;
+    print(weatherData);
     http.Response Locationresponse = await locationReq;
 
     // caching the data in shared preferences
     p.setString("weather", weatherData);
     p.setString("loaction", Locationresponse.body);
     var d = (jsonDecode(weatherData) as Map);
-
+    print(d);
     //getting Todays weather
     (d['hourly'] as List)
         .map((e) => todaysWeather.add(weather.fromJson(e)))

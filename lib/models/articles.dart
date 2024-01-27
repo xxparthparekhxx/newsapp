@@ -15,7 +15,7 @@ class Article {
     return Article(
         (a['source'] as Map)['name'],
         a['author'],
-        utf8.decode((a['title'] as String).runes.toList()),
+        (a['title'] as String),
         a['description'],
         a['url'],
         a['urlToImage'],
